@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SPSS Reports for FMU</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #0f0f0f;
+      color: #f1f1f1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 15px;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Starry Background Animation */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(#222 1px, transparent 1px), radial-gradient(#111 1px, transparent 1px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+      animation: moveStars 30s linear infinite;
+      z-index: -1;
+      opacity: 0.2;
+    }
+
+    @keyframes moveStars {
+      0% { background-position: 0 0, 20px 20px; }
+      100% { background-position: 100px 100px, 120px 120px; }
+    }
+
+    .container {
+      background: #1e1e1e;
+      width: 100%;
+      max-width: 700px;
+      padding: 30px 24px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 1s ease;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00ffd5;
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .tagline {
+      text-align: center;
+      font-size: 16px;
+      color: #bbb;
+      margin-bottom: 24px;
+    }
+
+    .btn-toggle {
+      display: block;
+      margin: 0 auto 24px auto;
+      background: #00ffd5;
+      color: #000;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-toggle:hover {
+      background: #1de9b6;
+      box-shadow: 0 0 6px #1de9b6, 0 0 10px #1de9b6;
+    }
+
+    .details {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .details.show {
+      display: block;
+      opacity: 1;
+    }
+
+    .highlight {
+      color: #00ffd5;
+      font-weight: bold;
+    }
+
+    ul {
+      list-style: none;
+      margin: 20px 0;
+      padding: 0;
+    }
+
+    ul li {
+      margin: 12px 0;
+      font-size: 17px;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #aaa;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .contact {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .contact a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px auto;
+      text-decoration: none;
+      color: #00bcd4;
+      font-weight: 500;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+
+    .contact a:hover {
+      color: #1de9b6;
+    }
+
+    .contact img {
+      width: 22px;
+      height: 22px;
+      margin-right: 10px;
+    }
+
+    /* WhatsApp Floating Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 55px;
+      height: 55px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+      z-index: 999;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 6px #25D366, 0 0 10px #25D366;
+    }
+
+    .whatsapp-float img {
+      width: 28px;
+      height: 28px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+      .container {
+        padding: 22px 18px;
+        border-radius: 12px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .btn-toggle {
+        font-size: 15px;
+        padding: 10px 22px;
+      }
+
+      ul li {
+        font-size: 15px;
+      }
+
+      .contact a {
+        font-size: 15px;
+      }
+
+      .contact img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>SPSS Report Services</h1>
+    <p class="tagline">For Faisalabad Medical University Students</p>
+
+    <button class="btn-toggle" onclick="toggleDetails()">Show Details</button>
+
+    <div class="details" id="detailsBox">
+      <ul>
+        <li><span class="highlight">Complete Report</span>: Rs. 8,000</li>
+        <li><span class="highlight">Word Report Only</span>: Rs. 5,000</li>
+        <li><span class="highlight">Raw SPSS Data</span>: Rs. 2,500</li>
+        <li><span class="highlight">Plagiarism Report</span>: Rs. 1,000</li>
+      </ul>
+      <p>✓ Plagiarism under 15% (Multiple platforms + ITU Lahore Approved)<br>
+         ✓ Clean & Professionally Formatted Word Files<br>
+         ✓ Quality Work – Always Before Your Deadline</p>
+      <p class="note">Just share your Excel form data and group member details. We'll handle the rest.</p>
+    </div>
+
+    <div class="contact">
+      <a href="https://wa.me/923344320120" target="_blank">
+        <img src="whatsapp.png" alt="WhatsApp Icon"> WhatsApp: 03344320120
+      </a>
+      <a href="mailto:bytesbanters@gmail.com">
+        <img src="email.png" alt="Email Icon"> Email: bytesbanters@gmail.com
+      </a>
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp Icon -->
+  <a href="https://wa.me/923344320120" class="whatsapp-float" target="_blank">
+    <img src="whatsapp.png" alt="Chat on WhatsApp">
+  </a>
+
+  <!-- JS for Toggle -->
+  <script>
+    function toggleDetails() {
+      const box = document.getElementById('detailsBox');
+      box.classList.toggle('show');
+    }
+  </script>
+
+</body>
+</html>
